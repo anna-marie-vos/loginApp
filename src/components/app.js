@@ -6,11 +6,17 @@ const { connect } = require('react-redux')
 const { AppBar } = require('material-ui')
 const { Link } = require('react-router')
 
+
 const App = (props) => {
   debug({props})
 
   return (
     <div>
+      <Link to="/login">
+        <button >
+          Login
+        </button>
+      </Link>
       <Link to="/profile">
         <button >
           Button One
@@ -22,6 +28,7 @@ const App = (props) => {
           Back
         </button>
       </Link>
+
       {props.children}
     </div>
   )
