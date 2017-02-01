@@ -9,7 +9,7 @@ module.exports = function(db) {
   route.get("/dummyData", dummyData);
   route.get("/allUsers", getAllUsers);
   route.get("/:id/profile", getProfileByID);
-  route.post("/", post);
+  route.post("/loginData", postLoginData);
 
   function dummyData(req,res,next){
     res.json({data:'hello'})
@@ -32,7 +32,9 @@ console.log('api/getProfileByID', req.params);
     })
   }
 
-  function post(req, res, next) {}
+  function postLoginData(req, res, next) {
+    console.log('postLoginData captured', req.body);
+  }
 
   return route;
 };

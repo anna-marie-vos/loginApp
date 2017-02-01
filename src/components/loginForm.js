@@ -1,7 +1,9 @@
 const debug = require('debug')('components:loginForm')
 const React = require('react')
-
 const { connect } = require('react-redux')
+var request = require('superagent');
+
+
 
 
 const loginForm = (props) => {
@@ -17,6 +19,10 @@ const loginForm = (props) => {
       </form>
     </div>
   )
+
+  console.log('req', this.refs);
+  request.post('/api/v1/loginData')
+
 }
 
 module.exports = connect((state) => state)(loginForm)
