@@ -7,7 +7,7 @@ module.exports = function (state, action) {
   console.log('action ',action);
 
   switch (action.type) {
-    case 'RENDER_PIC1':
+    case 'RENDER_PROFILE':
     console.log('action.payload',action.payload);
       newState.renderedPic = state.pics[action.payload.id]
 

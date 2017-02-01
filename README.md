@@ -1,14 +1,6 @@
-# React-Redux Shopping Cart
 
+# App should login
 
-## Spot the difference 
-
-# Morning
-
-# Afternoon
-
- 1. working solution
-
- 2. material ui
-
-##Notes
+* login form should render
+* submit login and renders restful route profile
+* using sesion it should render secret in profile

@@ -12,22 +12,19 @@ const App = (props) => {
   return (
     <div>
       <Link to="/profile">
-        <button onClick={()=> dispatch(renderPic(1))} >
+        <button >
           Button One
         </button>
       </Link>
-      {props.children}
+
       <Link to="/">
         <button >
-          back
+          Back
         </button>
       </Link>
+      {props.children}
     </div>
   )
 }
 
 module.exports = connect((state) => state)(App)
-
-function renderPic(id){
-  return {type:'RENDER_PIC1', payload: id}
-}
