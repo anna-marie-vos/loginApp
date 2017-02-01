@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "node-dev ./bin/www",
+    "dev": "nodemon ./bin/www",
     "test": "ava test/**/*.js --serial --verbose"
   },
   "babel": {

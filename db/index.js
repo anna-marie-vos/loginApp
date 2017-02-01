@@ -1,12 +1,15 @@
 module.exports = function (knex) {
-  
-  return {
-    find: function (table, options) {
-      return knex(table).select()
-    },
 
-    findById: function (table, id) {
-      return knex(table).select().then((rows) => rows[0])
+  return {
+
+    displayAllUsers:function(){
+      return knex('users')
+      .select('*')
+    },
+    displayUserByID: function(id){
+      return knex('users')
+      .select("*")
+      .where('users.id',id)
     }
   }
 }

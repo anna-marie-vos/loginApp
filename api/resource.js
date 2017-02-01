@@ -1,14 +1,35 @@
 const express = require("express");
 const route = express.Router();
 
+
 module.exports = function(db) {
 
-  route.get("/", get);
+
+//   /api/v1/
+  route.get("/dummyData", dummyData);
+  route.get("/allUsers", getAllUsers);
+  route.get("/:id/profile", getProfileByID);
   route.post("/", post);
 
-  function get(req, res, next) {
-    res.json({ data: [ "my", "data" ] });
-    // db.get()
+  function dummyData(req,res,next){
+    res.json({data:'hello'})
+  }
+
+  function getAllUsers(req, res, next) {
+    db.displayAllUsers()
+    .then(function(allUsers){
+      console.log('api/resource.js ', allUsers);
+      res.json(allUsers);
+    })
+  }
+
+  function getProfileByID(req,res,next){
+console.log('api/getProfileByID', req.params);
+    var id = req.params.id
+    db.displayUserByID(id)
+    .then(function(userData){
+      res.json(userData)
+    })
   }
 
   function post(req, res, next) {}
