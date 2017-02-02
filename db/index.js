@@ -6,6 +6,7 @@ module.exports = function (knex) {
       return knex('users')
       .select('*')
     },
+
     displayUserByID: function(id){
       return knex('users')
       .select("*")

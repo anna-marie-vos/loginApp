@@ -1,27 +1,32 @@
 const debug = require('debug')('components:loginForm')
 const React = require('react')
 const { connect } = require('react-redux')
-var request = require('superagent');
+const request = require('superagent');
 
 
 
 
-const loginForm = (props) => {
-  debug({props})
+class loginForm extends React.Component{
+  render(){
+    debug(this.props)
+    const { dispatch } = this.props
 
-  return (
-    <div>
-      <form>
-        <p>Email:</p><input type='email' ref='email' placeholder='email' />
-        <p>Password:</p><input type='password' ref='password' placeholder='password'/>
-        <p></p>
-        <button className='button'>log In</button>
-      </form>
-    </div>
-  )
+    return(
+      <div>
+        <form>
+          <p>Email:</p><input type='text' ref='email' placeholder='email' />
+          <p>Password:</p><input type='password' ref='password' placeholder='password'/>
+          <p></p>
+          <button onClick={this.handleClick.bind(this)} className='button'>log In</button>
+        </form>
+      </div>
+    )
+  }
 
-  console.log('req', this.refs);
-  request.post('/api/v1/loginData')
+  handleClick(e){
+    e.preventDefault()
+    console.log('refs', this.refs);
+  }
 
 }
 
