@@ -20,13 +20,12 @@ module.exports = function(db) {
   function getAllUsers(req, res, next) {
     db.displayAllUsers()
     .then(function(allUsers){
-      console.log('api/resource.js ', allUsers);
       res.json(allUsers);
     })
   }
 
   function getProfileByID(req,res,next){
-console.log('api/getProfileByID', req.params);
+  console.log('api/getProfileByID', req.params);
     var id = req.params.id
     db.displayUserByID(id)
     .then(function(userData){
@@ -36,10 +35,10 @@ console.log('api/getProfileByID', req.params);
 
   function postLoginData(req, res, next) {
     const email = req.body.email
-    const entered_password = req.body.password
+
     db.findUserByEmail(email)
     .then(function(user){
-      console.log('findUserByEmail returned', user);
+      res.json(checkPassword(req.body,user[0]))
     })
   }
 
@@ -56,13 +55,27 @@ console.log('api/getProfileByID', req.params);
         user.password = hash
           db.addNewUserToTable(user)
           .then((userByID)=>{
-            console.log('userByID', userByID[0]);
-            res.json(userByID)
+            res.json(userByID[0])
           })
       })
     })
   }
-
-
   return route;
 };
+
+function checkPassword(loginEntry, dbEntry){
+  console.log('checkPassword', loginEntry, dbEntry);
+  if(!dbEntry){
+    //if there is not entry in the db return error
+    return {login: false, error: 'Invalid email or Password'}
+  } else {
+    //if there is something in the db check the incryption
+    bcrypt.compare(loginEntry.password, dbEntry.password, function(err, response) {
+      if (response) {
+        return {id: dbEntry.id, login: true}
+      } else {
+        return {login: false, error: 'Invalid email/Password'}
+      }
+    })
+  }
+}
