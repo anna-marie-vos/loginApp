@@ -25,6 +25,7 @@ class loginForm extends React.Component{
   }
 
   handleClick(e){
+    //by default button onClicks will want to refresh the page and eventListener
     e.preventDefault()
     console.log('refs', this.refs.email.value);
     const email = this.refs.email.value
@@ -37,11 +38,11 @@ class loginForm extends React.Component{
         console.log('error in loginform', err);
       } else{
         console.log('response.body',response.body);
-        // this.props.router.push(`${response.body.id}/profile`)
+        this.props.router.push(`/profile`)
       }
-
     })
   }
+
 
 }
 
