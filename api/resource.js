@@ -1,3 +1,4 @@
+const bcrypt = require('bcryptjs')
 const express = require("express");
 const route = express.Router();
 
@@ -48,13 +49,20 @@ console.log('api/getProfileByID', req.params);
       'email': req.body.email,
       'password':req.body.password
     }
-
-    db.addNewUserToTable(user)
-    .then(function(userByID){
-      console.log('userByID', userByID[0]);
+    //encrypt password
+    bcrypt.genSalt(10, function (err, salt) {
+      bcrypt.hash(user.password, salt, function(err, hash) {
+        //add hashed password back to user object
+        user.password = hash
+          db.addNewUserToTable(user)
+          .then((userByID)=>{
+            console.log('userByID', userByID[0]);
+            res.json(userByID)
+          })
+      })
     })
-
   }
+
 
   return route;
 };

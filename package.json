@@ -17,6 +17,7 @@
     ]
   },
   "dependencies": {
+    "bcryptjs": "^2.4.0",
     "body-parser": "~1.13.2",
     "clone": "^2.1.0",
     "connect-livereload": "^0.6.0",
