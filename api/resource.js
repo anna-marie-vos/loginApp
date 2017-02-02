@@ -9,7 +9,7 @@ module.exports = function(db) {
   route.get("/dummyData", dummyData);
   route.get("/allUsers", getAllUsers);
   route.get("/:id/profile", getProfileByID);
-  route.post("/loginData", postLoginData);
+  route.post("/login", postLoginData);
 
   function dummyData(req,res,next){
     res.json({data:'hello'})

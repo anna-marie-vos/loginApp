@@ -7,6 +7,7 @@ const request = require('superagent');
 
 
 class loginForm extends React.Component{
+  //this is how we define functions in an class/object
   render(){
     debug(this.props)
     const { dispatch } = this.props
@@ -25,7 +26,21 @@ class loginForm extends React.Component{
 
   handleClick(e){
     e.preventDefault()
-    console.log('refs', this.refs);
+    console.log('refs', this.refs.email.value);
+    const email = this.refs.email.value
+    const password = this.refs.password.value
+
+    request.post('api/v1/login')
+    .send({email,password})
+    .end((err,response)=>{
+      if(err){
+        console.log('error in loginform', err);
+      } else{
+        console.log('response.body',response.body);
+        // this.props.router.push(`${response.body.id}/profile`)
+      }
+
+    })
   }
 
 }
