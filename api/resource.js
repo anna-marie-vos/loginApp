@@ -10,6 +10,7 @@ module.exports = function(db) {
   route.get("/allUsers", getAllUsers);
   route.get("/:id/profile", getProfileByID);
   route.post("/login", postLoginData);
+  route.post("/register", postNewUser);
 
   function dummyData(req,res,next){
     res.json({data:'hello'})
@@ -33,8 +34,25 @@ console.log('api/getProfileByID', req.params);
   }
 
   function postLoginData(req, res, next) {
-    console.log('postLoginData captured', req.body);
+    const email = req.body.email
+    const entered_password = req.body.password
+    db.findUserByEmail(email)
+    .then(function(user){
+      console.log('findUserByEmail returned', user);
+    })
+  }
 
+  function postNewUser(req,res, next){
+    const user = {
+      'name':req.body.name,
+      'email': req.body.email,
+      'password':req.body.password
+    }
+
+    db.addNewUserToTable(user)
+    .then(function(userByID){
+      console.log('userByID', userByID[0]);
+    })
 
   }
 

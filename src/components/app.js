@@ -17,6 +17,11 @@ const App = (props) => {
           Login
         </button>
       </Link>
+      <Link to="/register">
+        <button >
+          Register
+        </button>
+      </Link>
       <Link to="/profile">
         <button >
           Button One
