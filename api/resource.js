@@ -27,7 +27,6 @@ module.exports = function(db) {
   }
 
   function getProfileByID(req,res,next){
-  console.log('api/getProfileByID', req.params);
     var id = req.params.id
     db.displayUserByID(id)
     .then(function(userData){
@@ -53,6 +52,7 @@ module.exports = function(db) {
           name: match.userObj.name,
           isAdmin: match.userObj.isAdmin
         }
+        req.session.id = userbyID.id
         res.json({login:true, user: userbyID})
       }else{
         res.json({login:false, messages:"password wrong"})
@@ -80,7 +80,10 @@ module.exports = function(db) {
   }
 
   function loggedIn(req, res, next){
-    console.log('req.session',req.session);
+    const isLoggedIn = !req.session.id
+      ? false
+      : true
+    return isLoggedIn
   }
   return route;
 };

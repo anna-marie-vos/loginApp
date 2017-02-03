@@ -20,7 +20,6 @@ function Profile (props) {
 module.exports = connect((state) => state)(Profile)
 
 function UserProfile(user){
-  console.log('userProfile', user.name);
   return (
     <div>
       Profile of {user.name}

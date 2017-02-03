@@ -27,7 +27,6 @@ class loginForm extends React.Component{
   handleClick(e){
     //by default button onClicks will want to refresh the page and eventListener
     e.preventDefault()
-    console.log('refs', this.refs.email.value);
     const email = this.refs.email.value
     const password = this.refs.password.value
 
@@ -39,8 +38,8 @@ class loginForm extends React.Component{
       } else{
         const id = response.body.user.id
         const user = response.body.user
-        console.log('loginform response',response.body);
-        this.props.dispatch({type:'USER_PROFILE', payload:user})
+        console.log('response', response);
+          this.props.dispatch({type:'USER_PROFILE', payload:user})
         this.props.router.push(`/${id}/profile`)
       }
     })
