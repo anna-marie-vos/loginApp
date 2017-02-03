@@ -24,7 +24,7 @@ const App = (props) => {
       </Link>
       <Link to="/profile">
         <button >
-          Button One
+          Profile
         </button>
       </Link>
 

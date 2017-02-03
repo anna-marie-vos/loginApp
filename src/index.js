@@ -3,6 +3,7 @@ const debug = require('debug')('index')
 localStorage.debug = '*'
 
 // modules
+const request = require('superagent')
 const React = require('react')
 const ReactDOM = require('react-dom')
 const { Provider } = require('react-redux')
@@ -31,7 +32,7 @@ const Root = ({store}) => {
           <Route path="/" component={App} store={store}>
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
-            <Route path='/profile' component={Profile} />
+            <Route path='/profile' component={Profile} store={store}/>
           </Route>
         </Router>
       </Provider>
@@ -46,4 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <Root store={store}/>,
       root
     )
+    request('/api/v1/:id/profile',function(err,res){
+      store.dispatch({type:'USER_PROFILE', payload:res.body})
+    })
 })

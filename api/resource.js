@@ -38,7 +38,18 @@ module.exports = function(db) {
 
     db.findUserByEmail(email)
     .then(function(user){
-      res.json(checkPassword(req.body,user[0]))
+      if(!user){
+        res.json({login: false, error: 'Invalid email or Password'})
+      } else {
+        return checkPassword(req.body.password, user)
+      }
+    })
+    .then(function(match){
+      if(match.valid){
+        res.json({login:true, id: match.userObj.id})
+      }else{
+        res.json({login:false, messages:"password wrong"})
+      }
     })
   }
 
@@ -63,19 +74,14 @@ module.exports = function(db) {
   return route;
 };
 
-function checkPassword(loginEntry, dbEntry){
-  console.log('checkPassword', loginEntry, dbEntry);
-  if(!dbEntry){
-    //if there is not entry in the db return error
-    return {login: false, error: 'Invalid email or Password'}
-  } else {
-    //if there is something in the db check the incryption
-    bcrypt.compare(loginEntry.password, dbEntry.password, function(err, response) {
-      if (response) {
-        return {id: dbEntry.id, login: true}
-      } else {
-        return {login: false, error: 'Invalid email/Password'}
-      }
-    })
-  }
+function checkPassword(loginPassword, dbUser){
+  return new Promise(function(resolve,reject){
+      bcrypt.compare(loginPassword, dbUser.password, function(err, response) {
+        if (response) {
+          resolve ({'valid':true, 'userObj':dbUser})
+        } else {
+          resolve ({'valid':false, 'userObj':dbUser})
+        }
+      })
+  })
 }

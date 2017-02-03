@@ -37,7 +37,7 @@ class loginForm extends React.Component{
       if(err){
         console.log('error in loginform', err);
       } else{
-        console.log('response.body',response.body);
+        console.log('response',response);
         this.props.router.push(`/profile`)
       }
     })

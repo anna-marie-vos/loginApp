@@ -17,6 +17,9 @@ module.exports = function (knex) {
       return knex('users')
       .select('*')
       .where('users.email',email)
+      .then((users)=>{
+        return users[0]
+      })
     },
 
     addNewUserToTable: function(new_user){
