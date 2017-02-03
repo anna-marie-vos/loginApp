@@ -10,6 +10,8 @@ module.exports = function(db) {
   route.get("/dummyData", dummyData);
   route.get("/allUsers", getAllUsers);
   route.get("/users/:id", getProfileByID); //  /api/v1/
+  route.get("/logged-in", loggedIn); //  /api/v1/logged-in
+
   route.post("/login", postLoginData);
   route.post("/register", postNewUser);
 
@@ -48,7 +50,8 @@ module.exports = function(db) {
       if(match.valid){
         const userbyID ={
           id: match.userObj.id,
-          name: match.userObj.name
+          name: match.userObj.name,
+          isAdmin: match.userObj.isAdmin
         }
         res.json({login:true, user: userbyID})
       }else{
@@ -74,6 +77,10 @@ module.exports = function(db) {
           })
       })
     })
+  }
+
+  function loggedIn(req, res, next){
+    console.log('req.session',req.session);
   }
   return route;
 };

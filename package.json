@@ -25,6 +25,7 @@
     "debug": "^2.2.0",
     "easy-livereload": "^1.2.0",
     "express": "^4.13.4",
+    "express-session": "^1.15.0",
     "history": "^4.5.1",
     "knex": "^0.12.6",
     "livereload": "^0.6.0",
