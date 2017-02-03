@@ -9,8 +9,8 @@ module.exports = function (state, action) {
   switch (action.type) {
     case 'USER_PROFILE':
     console.log('USER_PROFILE',action.payload);
-      // newState.userProfile
-
+      newState.currentUser = action.payload.id
+      // newState.userInfo = action.payload
       return newState
 
     case 'REMOVE_FROM_CART':

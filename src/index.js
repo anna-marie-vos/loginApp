@@ -9,8 +9,8 @@ const ReactDOM = require('react-dom')
 const { Provider } = require('react-redux')
 const { createStore } = require('redux')
 const { MuiThemeProvider } = require('material-ui/styles')
-const createHistory = require('history').createHashHistory
-const { Router, Route, IndexRoute, browserHistory } = require('react-router')
+// const createHistory = require('history').createHashHistory
+const { Router, Route, IndexRoute, hashHistory } = require('react-router')
 
 const reducer = require('./reducer')
 const initialState = require('../state')
@@ -28,11 +28,11 @@ const Root = ({store}) => {
   return (
     <MuiThemeProvider>
       <Provider store={store} >
-        <Router history={browserHistory} >
+        <Router history={hashHistory} >
           <Route path="/" component={App} store={store}>
             <Route path='/login' component={LoginForm} />
             <Route path='/register' component={RegisterForm} />
-            <Route path='/profile' component={Profile} store={store}/>
+            <Route path='/:id/profile' component={Profile} />
           </Route>
         </Router>
       </Provider>

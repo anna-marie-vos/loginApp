@@ -8,5 +8,7 @@ module.exports = {
     3: 'http://img.psdvault.com/2009/10/The_Existence_2_by_roadioarts-500x500.jpg',
     4: 'http://farm4.static.flickr.com/3333/4608017835_5a10c5f30b.jpg'
   },
-  userProfile:{}
+  currentUser:null,
+  userInfo:{}
+
 }

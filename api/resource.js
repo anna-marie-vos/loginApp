@@ -9,7 +9,7 @@ module.exports = function(db) {
 //   /api/v1/
   route.get("/dummyData", dummyData);
   route.get("/allUsers", getAllUsers);
-  route.get("/:id/profile", getProfileByID);
+  route.get("/users/:id", getProfileByID); //  /api/v1/
   route.post("/login", postLoginData);
   route.post("/register", postNewUser);
 
@@ -46,7 +46,11 @@ module.exports = function(db) {
     })
     .then(function(match){
       if(match.valid){
-        res.json({login:true, id: match.userObj.id})
+        const userbyID ={
+          id: match.userObj.id,
+          name: match.userObj.name
+        }
+        res.json({login:true, user: userbyID})
       }else{
         res.json({login:false, messages:"password wrong"})
       }
