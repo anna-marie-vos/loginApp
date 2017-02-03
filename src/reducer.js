@@ -10,7 +10,7 @@ module.exports = function (state, action) {
     case 'USER_PROFILE':
     console.log('USER_PROFILE',action.payload);
       newState.currentUser = action.payload.id
-      // newState.userInfo = action.payload
+      newState.userInfo = action.payload
       return newState
 
     case 'REMOVE_FROM_CART':

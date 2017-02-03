@@ -6,7 +6,7 @@ const request = require('superagent');
 function Profile (props) {
   debug({props})
   const content = props.currentUser === Number(props.params.id)
-    ? <p>Hello</p>
+    ? UserProfile(props.userInfo)
     : <p>Restricted</p>
 
   return (
@@ -18,3 +18,13 @@ function Profile (props) {
 
 
 module.exports = connect((state) => state)(Profile)
+
+function UserProfile(user){
+  console.log('userProfile', user.name);
+  return (
+    <div>
+      Profile of {user.name}
+    </div>
+  )
+
+}
