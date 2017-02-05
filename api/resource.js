@@ -7,10 +7,10 @@ module.exports = function(db) {
 
 
 //   /api/v1/
-  route.get("/dummyData", dummyData);
-  route.get("/allUsers", getAllUsers);
-  route.get("/users/:id", getProfileByID); //  /api/v1/
-  route.get("/logged-in", loggedIn); //  /api/v1/logged-in
+  // route.get("/dummyData", dummyData);
+  // route.get("/allUsers", getAllUsers);
+  route.get("/users/:id",loggedIn, getProfileByID); //  /api/v1/
+  // route.get("/logged-in", loggedIn); //  /api/v1/logged-in
 
   route.post("/login", postLoginData);
   route.post("/register", postNewUser);
@@ -82,7 +82,7 @@ module.exports = function(db) {
   function loggedIn(req, res, next){
     const isLoggedIn = !req.session.id
       ? false
-      : true
+      : next()
     return isLoggedIn
   }
   return route;
